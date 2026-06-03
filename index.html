@@ -1212,60 +1212,106 @@ a.button.do.w-button:hover {
   padding: 0 max(1.5rem, calc((100vw - 1200px) / 2));
   overflow: visible !important;
 }
-.lps-video-carousel .swiper-wrapper { align-items: stretch; }
-
-/* Individual card */
-.lps-video-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  cursor: pointer;
+.lps-video-carousel .swiper-wrapper { align-items: flex-start; }
+.lps-video-carousel .swiper-slide {
+  height: auto !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
 }
 
-/* Thumbnail 9:16 vertical ratio */
+/* ── Video card — estilo iPhone/Eu Migro ── */
+.lps-video-card {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Frame para cards com vídeo real: sem aspect-ratio fixo, vídeo define a altura */
+/* placeholder cards */
 .lps-video-card_thumb {
   position: relative;
   aspect-ratio: 9 / 16;
-  border-radius: 16px;
+  border-radius: 28px;
   overflow: hidden;
-  background: #12193D;
+  background: #0d1230;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.45);
+  transition: transform 0.22s ease;
 }
+.lps-video-card_thumb:hover { transform: translateY(-2px); }
+
+/* card com vídeo real */
+.lps-video-card_thumb.has-video {
+  aspect-ratio: 9 / 16;
+  background: #000;
+  box-shadow: none;
+}
+
+/* Placeholder escuro */
 .lps-video-card_placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(160deg, #1a2550 0%, #0d1535 60%, #004DFF18 100%);
-}
-/* Play button */
-.lps-video-card_play {
   position: absolute;
   inset: 0;
+  background: linear-gradient(145deg, #141d3d 0%, #090e24 70%);
+}
+
+/* Vídeo: preenche o frame sem cortar */
+.lps-video-card_video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
+/* Play button — círculo branco com ícone azul, flutua sobre o vídeo */
+.lps-video-card_play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: none;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.5) inset;
+  pointer-events: all;
 }
-.lps-video-card_play:hover { transform: scale(1.1); }
+.lps-video-card_thumb:hover .lps-video-card_play {
+  transform: translate(-50%, -50%) scale(1.1);
+}
 .lps-video-card_play svg {
-  width: 52px;
-  height: 52px;
-  color: #fff;
-  background: rgba(0,77,255,0.85);
-  border-radius: 50%;
-  padding: 14px;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+  width: 22px; height: 22px;
+  color: #004DFF;
+  margin-left: 4px;
+  background: none;
+  filter: none;
+  border-radius: 0;
+  padding: 0;
 }
-/* Info below card */
+.lps-video-card_play.is-hidden { display: none; }
+
+/* Badge e nome overlay — mantidos para placeholders futuros */
+.lps-video-card_badge { display: none; }
+.lps-video-card_name-overlay { display: none; }
+
+/* Info abaixo do card */
 .lps-video-card_info {
-  padding: 0 0.25rem;
+  padding: 0.5rem 0.25rem 0;
 }
 .lps-video-card_name {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #12193D;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.15rem;
 }
 .lps-video-card_country {
   font-size: 0.8125rem;
@@ -1497,6 +1543,23 @@ a.button.do.w-button:hover {
 ══════════════════════════════════════════════════════ */
 .section_lps-benefits {
   background: oklch(15% 0.055 270);
+  position: relative;
+  overflow: hidden;
+}
+.lps-benefits-decor {
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 380px;
+  height: 380px;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  flex-shrink: 0;
+}
+.section_lps-benefits > .lps-padding-vertical-copy2 {
+  position: relative;
+  z-index: 1;
 }
 .section_lps-benefits .lps-benefits_header .heading-style-h2 {
   color: oklch(97% 0.005 270) !important;
@@ -1688,6 +1751,7 @@ a.button.do.w-button:hover {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
+  contain: layout;
 }
 .lps-stats_item:first-child {
   padding-left: 0 !important;
@@ -1706,6 +1770,10 @@ a.button.do.w-button:hover {
   margin-bottom: 0.125rem !important;
   line-height: 1 !important;
   letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  display: block;
+  min-height: 1em;
 }
 .lps-stats_label {
   font-size: 0.6875rem !important;
@@ -2283,6 +2351,85 @@ a.button.do.w-button:hover {
   font-size: 0.9375rem !important;
   line-height: 1.65 !important;
 }
+
+/* ══════════════════════════════════════════════════════
+   CEO QUOTE, substitui Olga (bloco single testimonial)
+══════════════════════════════════════════════════════ */
+.lps-ceo-quote {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 0.375rem !important;
+}
+.lps-ceo-quote_mark {
+  display: none;
+}
+.lps-ceo-quote_text {
+  font-size: 1.375rem !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+  line-height: 1.65 !important;
+  letter-spacing: 0.01em !important;
+  max-width: 38ch;
+  margin: 0 !important;
+}
+.lps-ceo-quote_text::before {
+  content: '\201C';
+  color: #2FCC64;
+  font-size: 2.25rem;
+  font-style: normal;
+  line-height: 0;
+  vertical-align: -0.35em;
+  margin-right: 0.05em;
+}
+.lps-ceo-quote_text::after {
+  content: '\201D';
+  color: #2FCC64;
+  font-size: 2.25rem;
+  font-style: normal;
+  line-height: 0;
+  vertical-align: -0.35em;
+  margin-left: 0.05em;
+}
+.lps-ceo-quote_sub {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.62);
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 50ch;
+  margin: 0.25rem 0 0;
+}
+.lps-ceo-quote_role {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 0.125rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAYOUT2, novo heading + promessa (deck Giselle)
+══════════════════════════════════════════════════════ */
+.lps-layout2-sub {
+  color: rgba(255,255,255,0.72) !important;
+  font-size: 1.125rem !important;
+  line-height: 1.55 !important;
+  margin-top: 0.25rem !important;
+  margin-bottom: 0 !important;
+}
+.lps-layout2-promessa {
+  display: inline-flex;
+  align-self: flex-start;
+  background: rgba(47,204,100,0.1);
+  border: 1px solid rgba(47,204,100,0.28);
+  border-radius: 100px;
+  padding: 0.5rem 1.125rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #2FCC64;
+  margin-bottom: 0.75rem;
+}
 </style>
 
 <!-- Lenis: scroll suave -->
@@ -2479,8 +2626,8 @@ a.button.do.w-button:hover {
             <div class="lps-form_intro" data-gsap="fade-up">
               <h2 class="heading-style-h2 lps-form_intro-headline" data-lang="pt">Você já sabe que quer vir. O que falta é clareza sobre os próximos passos.</h2>
               <h2 class="heading-style-h2 lps-form_intro-headline" data-lang="en">You already know you want to come. What's missing is clarity on the next steps.</h2>
-              <p class="lps-form_intro-body" data-lang="pt">Chegar ao Brasil pode ser mais simples do que parece. A gente cuida de cada etapa da sua mudança de forma transparente e segura. Você fica com a decisão. A gente fica com o planejamento.</p>
-              <p class="lps-form_intro-body" data-lang="en">Getting to Brazil can be simpler than it seems. We handle every step of your move transparently and safely. You keep the decision. We keep the planning.</p>
+              <p class="lps-form_intro-body" data-lang="pt">Nossa primeira conversa não começa com documentos. Começa com a sua história. A gente entende quem você é, onde quer chegar, e só então traça o caminho certo para você.</p>
+              <p class="lps-form_intro-body" data-lang="en">Our first conversation doesn't start with paperwork. It starts with your story. We understand who you are and where you want to go, then we map the right path for you.</p>
             </div>
 
             <div class="lps-stats_grid" data-gsap="stagger">
@@ -2509,7 +2656,7 @@ a.button.do.w-button:hover {
                 <div class="lps-stats_desc" data-lang="en">Portuguese and English. You communicate with us without barriers.</div>
               </div>
               <div class="lps-stats_item">
-                <div class="lps-stats_number">~3 m</div>
+                <div class="lps-stats_number" data-countup data-value="3" data-prefix="~" data-suffix=" m">~3 m</div>
                 <div class="lps-stats_label" data-lang="pt">Prazo médio</div>
                 <div class="lps-stats_label" data-lang="en">Average timeline</div>
                 <div class="lps-stats_divider"></div>
@@ -2663,7 +2810,8 @@ a.button.do.w-button:hover {
             </div>
             <div class="lps-form_form-whatsapp">
               <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img"><path d="M11 18H13V16H11V18ZM12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 6C9.79 6 8 7.79 8 10H10C10 8.9 10.9 8 12 8C13.1 8 14 8.9 14 10C14 12 11 11.75 11 15H13C13 12.75 16 12.5 16 10C16 7.79 14.21 6 12 6Z" fill="currentColor"/></svg></div>
-              <h4 class="heading-style-h6">Prefere conversar agora pelo <a id="abrir-formEB2" href="#" class="link-2">WhatsApp?</a></h4>
+              <h4 class="heading-style-h6" data-lang="pt">Prefere conversar agora pelo <a id="abrir-formEB2" href="#" class="link-2">WhatsApp?</a></h4>
+              <h4 class="heading-style-h6" data-lang="en">Prefer to chat now on <a href="#" class="link-2">WhatsApp?</a></h4>
               <p class="text-size-regular" data-lang="pt">Tenha acesso a um planejamento estratégico do seu processo e a um orçamento personalizado, construídos de acordo com o seu perfil e objetivos.</p>
               <p class="text-size-regular" data-lang="en">Get access to a strategic plan for your process and a personalized quote, built according to your profile and objectives.</p>
             </div>
@@ -2679,6 +2827,8 @@ a.button.do.w-button:hover {
      BENEFÍCIOS, CIDADANIA BRASILEIRA
 ════════════════════════════════════════ -->
 <div class="section_lps-benefits">
+  <!-- decoração flor neon -->
+  <img class="lps-benefits-decor" src="flor_neon.png" alt="" aria-hidden="true"/>
   <div data-padding-section-vertical="both" class="padding-global-copy2 lps-padding-vertical-copy2">
     <div class="container-large">
       <div class="lps-benefits_header" data-gsap="fade-up">
@@ -2781,8 +2931,15 @@ a.button.do.w-button:hover {
               <div class="tag_text" data-lang-inline="en">WHY AMORIM</div>
               <div class="tag_dot"></div>
             </div>
-            <h2 class="heading-style-h2" data-lang="pt">O seu destino já está definido. Deixa o planejamento com a gente.</h2>
-            <h2 class="heading-style-h2" data-lang="en">Your destination is set. Now it's time to plan.</h2>
+            <h2 class="heading-style-h2" data-lang="pt">Não somos um escritório de advocacia. Não somos uma despachante de vistos.</h2>
+            <h2 class="heading-style-h2" data-lang="en">We're not a law firm. We're not a visa agency.</h2>
+            <p class="text-size-medium lps-layout2-sub" data-lang="pt">Somos arquitetos de jornadas. Cada processo é um sonho que estamos realizando.</p>
+            <p class="text-size-medium lps-layout2-sub" data-lang="en">We are journey architects. Every process is a dream we are bringing to life.</p>
+          </div>
+
+          <div class="lps-layout2-promessa">
+            <span data-lang="pt">Soluções completas · Experiência humana · Resultado surpreendente</span>
+            <span data-lang="en">Complete solutions · Human experience · Outstanding results</span>
           </div>
 
           <div class="feature-item-wrap">
@@ -2816,10 +2973,10 @@ a.button.do.w-button:hover {
             <div class="feature-item">
               <div class="feature-item_icon"><div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#004DFF"/><path d="M16.7089 8.69873C16.7589 8.69873 16.7841 8.72686 16.7841 8.77686C16.7841 8.80226 16.7606 8.83154 16.7606 8.83154L10.3495 15.2388C10.2997 15.264 10.2855 15.264 10.2782 15.2611L7.25179 12.2397C7.14286 12.1308 7.14286 11.9541 7.25179 11.8452C7.36071 11.7363 7.53744 11.7363 7.64637 11.8452L10.2987 14.5136L16.6464 8.72705C16.6731 8.70104 16.6867 8.69873 16.7089 8.69873Z" fill="white" stroke="white"/></svg></div></div>
               <div class="feature-item_info">
-                <p class="text-size-medium text-weight-bold" data-lang="pt">Documento próprio para nômades digitais</p>
-                <p class="text-size-medium text-weight-bold" data-lang="en">Streamlined process for digital nomads</p>
-                <p class="text-size-regular" data-lang="pt">A Amorim desenvolveu um modelo de documento específico para nômades digitais, validado em casos reais.</p>
-                <p class="text-size-regular" data-lang="en">Amorim developed an in-house document template for the digital nomad visa, refined through real client cases.</p>
+                <p class="text-size-medium text-weight-bold" data-lang="pt">Enxergamos além do que você pediu</p>
+                <p class="text-size-medium text-weight-bold" data-lang="en">We see beyond what you asked for</p>
+                <p class="text-size-regular" data-lang="pt">Mapeamos toda a sua jornada e identificamos o que você vai precisar antes de você perguntar.</p>
+                <p class="text-size-regular" data-lang="en">We map your complete journey and anticipate what you'll need before you even ask.</p>
               </div>
             </div>
           </div>
@@ -2858,18 +3015,17 @@ a.button.do.w-button:hover {
 <div class="section_lps-single-testimonial">
   <div data-padding-section-vertical="both" class="padding-global-copy2 lps-padding-vertical-copy2">
     <div class="container-small-copy2">
-      <div class="lps-single-testimonial_content-copy2">
-        <div class="lps-single-testimonial_stars w-embed">
-          <svg xmlns="http://www.w3.org/2000/svg" width="116" height="19" viewBox="0 0 116 19" aria-hidden="true">
-            <use href="#star-5"/>
-          </svg>
-        </div>
-        <h2 class="heading-style-h5" data-lang="pt">"Muito obrigada ao time de Amorim pelo atendimento rápido e atencioso, por respeitar as necessidades do cliente e acompanhar todo o processo com muita dedicação! Contrataria novamente se precisar."</h2>
-        <h2 class="heading-style-h5" data-lang="en">"Many thanks to the Amorim team for the quick and attentive service, for respecting the client's needs and following up on every step with great dedication! I would hire them again if needed."</h2>
+      <div class="lps-single-testimonial_content-copy2 lps-ceo-quote">
+        <div class="lps-ceo-quote_mark" aria-hidden="true">"</div>
+        <h2 class="heading-style-h4 lps-ceo-quote_text" data-lang="pt">Cada pessoa que nos procura carrega um sonho que não cabe em um formulário.</h2>
+        <h2 class="heading-style-h4 lps-ceo-quote_text" data-lang="en">Every person who comes to us carries a dream that no form can contain.</h2>
+        <p class="lps-ceo-quote_sub" data-lang="pt">Nossa diferença começa quando paramos de vender serviços e começamos a entender histórias.</p>
+        <p class="lps-ceo-quote_sub" data-lang="en">Our difference starts when we stop selling services and start understanding stories.</p>
         <div class="lps-single-testimonial_client">
-          <img loading="lazy" src="https://cdn.prod.website-files.com/669b5fced1bf20317562ea9d/69854ad674a2e0d6b385cb2b_unnamed.png" alt="Olga Shcheglova" class="lps-single-testimonial_img"/>
           <div class="lps-single-testimonial_client-info">
-            <div class="text-size-medium text-weight-bold"><strong>Olga Shcheglova</strong></div>
+            <div class="text-size-medium text-weight-bold"><strong>Giselle Amorim</strong></div>
+            <div class="lps-ceo-quote_role" data-lang="pt">CEO, Amorim Global</div>
+            <div class="lps-ceo-quote_role" data-lang="en">CEO, Amorim Global</div>
           </div>
         </div>
       </div>
@@ -2892,8 +3048,8 @@ a.button.do.w-button:hover {
             </div>
             <h2 class="heading-style-h2" data-lang="pt">Histórias de quem já fez o caminho</h2>
             <h2 class="heading-style-h2" data-lang="en">Stories from people who made Brazil their home</h2>
-            <p class="text-size-medium lps-reviews_subtitle" data-lang="pt">Histórias reais de pessoas que concluíram o processo de residência com a Amorim Global.</p>
-            <p class="text-size-medium lps-reviews_subtitle" data-lang="en">Real stories from people who completed their residency process with Amorim Global.</p>
+            <p class="text-size-medium lps-reviews_subtitle" data-lang="pt">Histórias reais de pessoas que confiaram um sonho à Amorim Global, e viram acontecer.</p>
+            <p class="text-size-medium lps-reviews_subtitle" data-lang="en">Real stories from people who trusted Amorim Global with a dream, and watched it come true.</p>
           </div>
         </div>
 
@@ -2920,19 +3076,19 @@ a.button.do.w-button:hover {
           </div>
           <div class="lps-video-carousel swiper" id="videoTestimonialsSwiper">
             <div class="swiper-wrapper">
-        <!-- Card 1 -->
+        <!-- Card 1 — vídeo real -->
         <div class="swiper-slide">
           <div class="lps-video-card">
-            <div class="lps-video-card_thumb">
-              <div class="lps-video-card_placeholder"></div>
+            <div class="lps-video-card_thumb has-video" data-video-src="depoimento_01.mp4">
+              <video class="lps-video-card_video" src="depoimento_01.mp4" poster="depoimento_01_thumb.jpg" playsinline preload="metadata"></video>
               <button class="lps-video-card_play" aria-label="Assistir depoimento">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
             </div>
             <div class="lps-video-card_info">
-              <div class="lps-video-card_name" data-lang="pt">Depoimento em breve</div>
-              <div class="lps-video-card_name" data-lang="en">Testimonial coming soon</div>
-              <div class="lps-video-card_country">🇺🇸 Estados Unidos</div>
+              <div class="lps-video-card_name" data-lang="pt">Depoimento — cliente</div>
+              <div class="lps-video-card_name" data-lang="en">Client testimonial</div>
+              <div class="lps-video-card_country">🇧🇷 Brasil</div>
             </div>
           </div>
         </div>
@@ -4034,8 +4190,8 @@ a.button.do.w-button:hover {
             <h2 data-lang="pt">Pronto para dar o <strong>primeiro passo?</strong></h2>
             <h2 data-lang="en">Ready to take the <strong>first step?</strong></h2>
           </div>
-          <p data-lang="pt">Nossa consulta inicial é gratuita. Em 30 minutos você sabe exatamente qual é o seu caminho para morar no Brasil e o que precisa fazer para começar.</p>
-          <p data-lang="en">Our initial consultation is free. In 30 minutes, you'll know exactly what your path to living in Brazil looks like and what you need to do to start.</p>
+          <p data-lang="pt">Não entregamos processos. Entregamos a realização de um sonho. A consulta inicial é gratuita, e é onde tudo começa.</p>
+          <p data-lang="en">We don't deliver processes. We deliver the realization of a dream. Your initial consultation is free, and it's where everything begins.</p>
           <a href="#section-form" class="sc-primary-button w-inline-block">
             <div class="button-text" data-lang-inline="pt">Começar gratuitamente</div>
             <div class="button-text" data-lang-inline="en">Start for free</div>
@@ -4400,10 +4556,10 @@ function showConditionalFields(value, lang) {
         prevEl: '.lps-video-carousel_prev',
       },
       breakpoints: {
-        540:  { slidesPerView: 2.2, spaceBetween: 18 },
-        768:  { slidesPerView: 3.2, spaceBetween: 20 },
-        1024: { slidesPerView: 4.2, spaceBetween: 20 },
-        1280: { slidesPerView: 4.5, spaceBetween: 24 },
+        540:  { slidesPerView: 2.0, spaceBetween: 18 },
+        768:  { slidesPerView: 2.8, spaceBetween: 20 },
+        1024: { slidesPerView: 3.6, spaceBetween: 22 },
+        1280: { slidesPerView: 4.0, spaceBetween: 24 },
       },
     });
   }
@@ -4466,19 +4622,53 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 }
 
 /* ── CountUp nos KPIs ── */
-if (typeof CountUp !== 'undefined') {
+const _CountUpLib = window.CountUp || window.countUp;
+if (_CountUpLib) {
   document.querySelectorAll('[data-countup]').forEach(el => {
     const val = parseFloat(el.dataset.value || 0);
-    const cu = new CountUp.CountUp(el, val, {
-      duration: 2.2,
+    const cu = new _CountUpLib.CountUp(el, val, {
+      startVal: 0,
+      duration: 2.8,
+      useEasing: true,
+      useGrouping: false,
       suffix: el.dataset.suffix || '',
       prefix: el.dataset.prefix || '',
       enableScrollSpy: true,
       scrollSpyOnce: true,
+      scrollSpyDelay: 200,
     });
     if (!cu.error) cu.start();
+    else console.warn('CountUp error:', cu.error, el);
   });
+} else {
+  console.warn('CountUp.js não carregou');
 }
+</script>
+
+<!-- ════ INLINE VIDEO PLAY ════ -->
+<script>
+(function() {
+  document.querySelectorAll('.lps-video-card_thumb[data-video-src]').forEach(thumb => {
+    const video   = thumb.querySelector('.lps-video-card_video');
+    const playBtn = thumb.querySelector('.lps-video-card_play');
+    if (!video || !playBtn) return;
+
+    // Clique no play: inicia com controles nativos
+    playBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      video.controls = true;
+      video.play().catch(() => {});
+      playBtn.classList.add('is-hidden');
+    });
+
+    // Pausa / fim: mostra botão de play de volta
+    ['pause', 'ended'].forEach(ev => {
+      video.addEventListener(ev, () => {
+        playBtn.classList.remove('is-hidden');
+      });
+    });
+  });
+})();
 </script>
 
 </body>
