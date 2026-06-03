@@ -614,6 +614,22 @@ body.is-en [data-lang-opt="pt"] { display: none !important; }
   width: 22px;
   height: 22px;
 }
+/* Número em círculo navy */
+.lps-benefits-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #12193D;
+  color: #2FCC64;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
 
 /* ── BENEFITS SECTION ── */
 .lps-benefits_header {
@@ -1611,16 +1627,7 @@ a.button.do.w-button:hover {
   display: none;
 }
 .section_lps-benefits .lps-layout3_card::before {
-  content: "0" counter(benefit-counter);
-  font-size: 0.6875rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: oklch(93% 0.23 145);
-  font-family: Manrope, sans-serif;
-  flex-shrink: 0;
-  width: 1.75rem;
-  padding-top: 0.2rem;
-  line-height: 1;
+  display: none;
 }
 .section_lps-benefits .div-block-79 {
   display: flex;
@@ -2127,9 +2134,7 @@ a.button.do.w-button:hover {
   line-height: 1.7 !important;
 }
 .section_lps-benefits .lps-layout3_card::before {
-  font-size: 0.8125rem !important;
-  width: 2.25rem !important;
-  padding-top: 0.25rem !important;
+  display: none !important;
 }
 /* Keyword highlight via <strong> */
 .section_lps-benefits .div-block-79 .text-size-regular strong {
@@ -2322,8 +2327,19 @@ a.button.do.w-button:hover {
   max-width: 34ch;
 }
 .living_flip-back-emoji {
-  font-size: 2.75rem;
-  line-height: 1;
+  width: 52px;
+  height: 52px;
+  color: #2FCC64;
+  flex-shrink: 0;
+}
+.living_flip-back-emoji svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .living_flip-back-curiosity {
   font-size: 1.05rem;
@@ -2847,7 +2863,7 @@ a.button.do.w-button:hover {
 
         <!-- 01 Conta Bancária & CPF -->
         <div class="lps-layout3_card">
-          <div class="icon-embed-medium lps-benefits-icon-wrap"><div class="w-embed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/><line x1="5" y1="15" x2="9" y2="15"/><line x1="12" y1="15" x2="14" y2="15"/></svg></div></div>
+          <div class="lps-benefits-num">01</div>
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Conta Bancária & CPF</h3>
             <h3 class="heading-style-h5" data-lang="en">Bank Account & CPF</h3>
@@ -2858,7 +2874,7 @@ a.button.do.w-button:hover {
 
         <!-- 02 Reunião Familiar -->
         <div class="lps-layout3_card">
-          <div class="icon-embed-medium lps-benefits-icon-wrap"><div class="w-embed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div></div>
+          <div class="lps-benefits-num">02</div>
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Trazer Quem Você Ama</h3>
             <h3 class="heading-style-h5" data-lang="en">Bring Who You Love</h3>
@@ -2869,7 +2885,7 @@ a.button.do.w-button:hover {
 
         <!-- 03 Trabalhar & Empreender -->
         <div class="lps-layout3_card">
-          <div class="icon-embed-medium lps-benefits-icon-wrap"><div class="w-embed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div></div>
+          <div class="lps-benefits-num">03</div>
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Trabalhar & Empreender</h3>
             <h3 class="heading-style-h5" data-lang="en">Work & Build a Business</h3>
@@ -2880,7 +2896,7 @@ a.button.do.w-button:hover {
 
         <!-- 04 Segurança para Ficar -->
         <div class="lps-layout3_card">
-          <div class="icon-embed-medium lps-benefits-icon-wrap"><div class="w-embed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div></div>
+          <div class="lps-benefits-num">04</div>
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Segurança para Ficar</h3>
             <h3 class="heading-style-h5" data-lang="en">Security to Stay</h3>
@@ -2891,7 +2907,7 @@ a.button.do.w-button:hover {
 
         <!-- 05 Saúde Pública (SUS) -->
         <div class="lps-layout3_card">
-          <div class="icon-embed-medium lps-benefits-icon-wrap"><div class="w-embed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div></div>
+          <div class="lps-benefits-num">05</div>
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Saúde Pública Universal</h3>
             <h3 class="heading-style-h5" data-lang="en">Universal Public Healthcare</h3>
@@ -2902,7 +2918,7 @@ a.button.do.w-button:hover {
 
         <!-- 06 Porta para a Cidadania -->
         <div class="lps-layout3_card">
-          <div class="icon-embed-medium lps-benefits-icon-wrap"><div class="w-embed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></div>
+          <div class="lps-benefits-num">06</div>
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Porta para a Cidadania</h3>
             <h3 class="heading-style-h5" data-lang="en">A Path to Citizenship</h3>
@@ -4079,9 +4095,9 @@ a.button.do.w-button:hover {
               </div>
               <div class="living_flip-back">
                 <div class="living_flip-back-inner">
-                  <span class="living_flip-back-emoji">🌊</span>
-                  <p class="living_flip-back-curiosity" data-lang="pt">O Brasil tem <strong>7.491 km de litoral</strong> mais de 2.000 praias catalogadas, mais do que qualquer outro país da América do Sul.</p>
-                  <p class="living_flip-back-curiosity" data-lang="en">Brazil has <strong>7,491 km of coastline</strong> over 2,000 catalogued beaches, more than any other country in South America.</p>
+                  <span class="living_flip-back-emoji"><svg viewBox="0 0 24 24"><path d="M2 12c1.5-2 3-3 5-3s3.5 1 5 3 3.5 3 5 3"/><path d="M2 17c1.5-2 3-3 5-3s3.5 1 5 3 3.5 3 5 3"/><path d="M2 7c1.5-2 3-3 5-3s3.5 1 5 3 3.5 3 5 3"/></svg></span>
+                  <p class="living_flip-back-curiosity" data-lang="pt">O Brasil tem <strong>7.491 km de litoral</strong> e mais de 2.000 praias catalogadas. Qualidade de vida real, com custo até 60% menor do que nas principais capitais europeias.</p>
+                  <p class="living_flip-back-curiosity" data-lang="en">Brazil has <strong>7,491 km of coastline</strong> and over 2,000 catalogued beaches. Real quality of life, at up to 60% less than most European capitals.</p>
                 </div>
               </div>
             </div>
@@ -4100,9 +4116,9 @@ a.button.do.w-button:hover {
               </div>
               <div class="living_flip-back">
                 <div class="living_flip-back-inner">
-                  <span class="living_flip-back-emoji">🍖</span>
-                  <p class="living_flip-back-curiosity" data-lang="pt">O açaí é da Amazônia e virou febre global. A feijoada, criada no Rio, é símbolo da mistura cultural que define a <strong>cozinha mais diversa da América Latina</strong>.</p>
-                  <p class="living_flip-back-curiosity" data-lang="en">Açaí comes from the Amazon and became a global trend. Feijoada, born in Rio, symbolizes the cultural mix behind <strong>Latin America's most diverse cuisine</strong>.</p>
+                  <span class="living_flip-back-emoji"><svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span>
+                  <p class="living_flip-back-curiosity" data-lang="pt">Do açaí amazônico ao churrasco gaúcho, com restaurantes com estrelas Michelin. São Paulo tem <strong>mais de 15.000 restaurantes</strong> e é reconhecida como um dos maiores polos gastronômicos do mundo.</p>
+                  <p class="living_flip-back-curiosity" data-lang="en">From Amazonian açaí to Brazilian BBQ, including Michelin-starred restaurants. São Paulo has <strong>15,000+ restaurants</strong> and is recognized as one of the world's great culinary capitals.</p>
                 </div>
               </div>
             </div>
@@ -4121,7 +4137,7 @@ a.button.do.w-button:hover {
               </div>
               <div class="living_flip-back">
                 <div class="living_flip-back-inner">
-                  <span class="living_flip-back-emoji">☀️</span>
+                  <span class="living_flip-back-emoji"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
                   <p class="living_flip-back-curiosity" data-lang="pt">O Brasil é o único país que atravessa tanto a Linha do Equador quanto o Trópico de Capricórnio e por isso concentra <strong>quase todos os biomas do planeta</strong>.</p>
                   <p class="living_flip-back-curiosity" data-lang="en">Brazil is the only country that spans both the Equator and the Tropic of Capricorn home to <strong>almost every biome on Earth</strong>.</p>
                 </div>
@@ -4142,7 +4158,7 @@ a.button.do.w-button:hover {
               </div>
               <div class="living_flip-back">
                 <div class="living_flip-back-inner">
-                  <span class="living_flip-back-emoji">🏥</span>
+                  <span class="living_flip-back-emoji"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
                   <p class="living_flip-back-curiosity" data-lang="pt">O SUS tem <strong>mais de 43.000 unidades de atendimento</strong> e é considerado um dos maiores sistemas de saúde pública universal do mundo gratuito para todos os residentes legais.</p>
                   <p class="living_flip-back-curiosity" data-lang="en">SUS has <strong>over 43,000 healthcare facilities</strong> and is one of the world's largest universal public health systems free for all legal residents.</p>
                 </div>
@@ -4163,9 +4179,9 @@ a.button.do.w-button:hover {
               </div>
               <div class="living_flip-back">
                 <div class="living_flip-back-inner">
-                  <span class="living_flip-back-emoji">🤝</span>
-                  <p class="living_flip-back-curiosity" data-lang="pt">O Brasil abriga a <strong>maior comunidade japonesa fora do Japão</strong>, a maior população afrodescendente fora da África e mais de 180 línguas faladas em seu território.</p>
-                  <p class="living_flip-back-curiosity" data-lang="en">Brazil is home to the <strong>largest Japanese community outside Japan</strong>, the largest African diaspora outside Africa, and over 180 languages spoken within its borders.</p>
+                  <span class="living_flip-back-emoji"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></span>
+                  <p class="living_flip-back-curiosity" data-lang="pt">Americanos e europeus que escolhem o Brasil costumam se surpreender com uma coisa: <strong>como rápido se sentir em casa</strong>. Com mais de 180 culturas convivendo, o Brasil não cria estrangeiros, cria vizinhos.</p>
+                  <p class="living_flip-back-curiosity" data-lang="en">Americans and Europeans who move to Brazil share one surprise: <strong>how quickly it feels like home</strong>. With 180+ cultures living side by side, Brazil doesn't create foreigners, it creates neighbors.</p>
                 </div>
               </div>
             </div>
