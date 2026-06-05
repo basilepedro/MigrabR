@@ -1687,7 +1687,7 @@ a.button.do.w-button:hover {
 }
 .google-reviews_info-rating {
   display: flex !important;
-  align-items: baseline !important;
+  align-items: center !important;
   gap: 0.25rem !important;
 }
 .google-reviews_info-rating .text-size-medium {
@@ -1955,6 +1955,16 @@ a.button.do.w-button:hover {
 .section_lps-pathways .lps-pathway_card:hover {
   transform: translateY(-5px) !important;
   box-shadow: 0 10px 36px rgba(0,77,255,0.12) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   FAQ: sticky left column (Apple-style, desktop only)
+══════════════════════════════════════════════════════ */
+.lps-faq_content {
+  align-items: start !important;
+}
+.lps-faq_content-left {
+  will-change: transform;
 }
 
 /* ══════════════════════════════════════════════════════
@@ -2446,6 +2456,77 @@ a.button.do.w-button:hover {
   color: #2FCC64;
   margin-bottom: 0.75rem;
 }
+
+/* ══════════════════════════════════════════════════════
+   TIMELINE SLIDE 7: ícone de aprovação verde neon
+══════════════════════════════════════════════════════ */
+/* Círculo "7" da timeline em verde neon */
+.is-lps-timeline-card:last-child .lps-timeline_circle {
+  background: #2FCC64 !important;
+  border-color: #2FCC64 !important;
+  color: #12193D !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 14px rgba(47,204,100,0.45) !important;
+}
+/* Título do último slide também em verde */
+.lps-timeline-final {
+  color: #2FCC64 !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   FORM + KPI FIXES (molde LP Alemã: 1fr 1fr, KPI 2×2)
+══════════════════════════════════════════════════════ */
+
+/* Align-items start so right column doesn't stretch (same as German LP) */
+.lps-form_content {
+  align-items: start !important;
+}
+
+/* Compact form inputs — tighter than Webflow default, but proportional */
+.lps-form_input.w-input,
+.lps-form_input.w-select {
+  padding-top: 0.6rem !important;
+  padding-bottom: 0.6rem !important;
+  font-size: 0.875rem !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+/* Tighter gap between input pairs */
+.lps-form_inputs-wrap { gap: 0.5rem !important; margin-bottom: 0.5rem !important; }
+/* Label: same size as inputs above */
+.lps-form_question-label { margin-top: 0.5rem !important; font-size: 0.875rem !important; }
+
+/* KPI inside form left column: 2×2 grid instead of 4-in-a-row
+   so each item has enough width for its text */
+.lps-form_content-left .lps-stats_grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  padding: 1.75rem 1.5rem !important;
+  gap: 0 !important;
+}
+/* In 2×2: restore borders for 2-column layout */
+.lps-form_content-left .lps-stats_item {
+  padding: 0.875rem 1rem !important;
+  border-right: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+}
+.lps-form_content-left .lps-stats_item:nth-child(odd) {
+  border-right: 1px solid rgba(255,255,255,0.18) !important;
+}
+.lps-form_content-left .lps-stats_item:nth-child(3),
+.lps-form_content-left .lps-stats_item:nth-child(4) {
+  border-bottom: none !important;
+}
+/* Numbers compact for 2×2 */
+.lps-form_content-left .lps-stats_number {
+  font-size: clamp(1.75rem, 3vw, 2.75rem) !important;
+}
+/* Desc: no max-width so it wraps naturally in the wider 2×2 cell */
+.lps-form_content-left .lps-stats_desc {
+  max-width: none !important;
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+  color: rgba(255,255,255,0.88) !important;
+}
 </style>
 
 <!-- Lenis: scroll suave -->
@@ -2676,8 +2757,8 @@ a.button.do.w-button:hover {
                 <div class="lps-stats_label" data-lang="pt">Prazo médio</div>
                 <div class="lps-stats_label" data-lang="en">Average timeline</div>
                 <div class="lps-stats_divider"></div>
-                <div class="lps-stats_desc" data-lang="pt">Do primeiro contato até a aprovação da sua residência no Brasil.</div>
-                <div class="lps-stats_desc" data-lang="en">From first contact to approval of your residency in Brazil.</div>
+                <div class="lps-stats_desc" data-lang="pt">Do primeiro contato até o registro na Polícia Federal.</div>
+                <div class="lps-stats_desc" data-lang="en">From first contact to your registration at the Federal Police.</div>
               </div>
             </div>
           </div>
@@ -2728,18 +2809,18 @@ a.button.do.w-button:hover {
                   <select name="Reason" id="motivo-en" required class="lps-form_input w-select" data-lang="en" onchange="showConditionalFields(this.value, 'en')">
                     <option value="">Select</option>
                     <option value="Nomade Digital">Digital Nomad</option>
-                    <option value="Reuniao Familiar">Family Reunification</option>
+                    <option value="Reuniao Familiar">Family Reunion</option>
                     <option value="Aposentadoria">Retirement / Pension</option>
                     <option value="Estudante">Student</option>
-                    <option value="Trabalho">Work Authorization</option>
+                    <option value="Trabalho">Work Permit</option>
                     <option value="Outro">Other</option>
                   </select>
                 </div>
 
                 <!-- Campos condicionais: Nômade Digital -->
                 <div id="cond-nomade" class="lps-form_conditional" style="display:none">
-                  <div class="lps-form_question-label" data-lang="pt">Você possui renda mensal acima de USD 1.500 proveniente do exterior?</div>
-                  <div class="lps-form_question-label" data-lang="en">Do you have a monthly income above USD 1,500 from abroad?</div>
+                  <div class="lps-form_question-label" data-lang="pt">Você possui renda mensal igual ou superior a USD 1.500 proveniente do exterior?</div>
+                  <div class="lps-form_question-label" data-lang="en">Do you have a monthly income of at least USD 1,500 from abroad?</div>
                   <div class="lps-form_inputs-wrap">
                     <select name="Renda_Nomade" class="lps-form_input w-select" data-lang="pt">
                       <option value="">Selecione</option>
@@ -2774,20 +2855,50 @@ a.button.do.w-button:hover {
 
                 <!-- Campos condicionais: Aposentadoria -->
                 <div id="cond-aposentadoria" class="lps-form_conditional" style="display:none">
-                  <div class="lps-form_question-label" data-lang="pt">Você possui renda passiva mensal acima de USD 2.000 (aposentadoria, pensão ou investimentos)?</div>
-                  <div class="lps-form_question-label" data-lang="en">Do you have monthly passive income above USD 2,000 (retirement, pension, or investments)?</div>
+                  <div class="lps-form_question-label" data-lang="pt">Você é legalmente aposentado(a) ou pensionista?</div>
+                  <div class="lps-form_question-label" data-lang="en">Are you legally retired or a pensioner?</div>
                   <div class="lps-form_inputs-wrap">
-                    <select name="Renda_Aposent" class="lps-form_input w-select" data-lang="pt">
+                    <select name="Status_Aposent" class="lps-form_input w-select" data-lang="pt">
                       <option value="">Selecione</option>
                       <option value="Sim">Sim</option>
                       <option value="Nao">Não</option>
                       <option value="Nao sei">Não tenho certeza</option>
                     </select>
-                    <select name="Income_Retire" class="lps-form_input w-select" data-lang="en">
+                    <select name="Status_Retire" class="lps-form_input w-select" data-lang="en">
                       <option value="">Select</option>
                       <option value="Sim">Yes</option>
                       <option value="Nao">No</option>
                       <option value="Nao sei">Not sure</option>
+                    </select>
+                  </div>
+                  <div class="lps-form_question-label" data-lang="pt">Sua pensão ou aposentadoria é de pelo menos USD 2.000/mês?</div>
+                  <div class="lps-form_question-label" data-lang="en">Is your pension or retirement income at least USD 2,000/month?</div>
+                  <div class="lps-form_inputs-wrap">
+                    <select name="Renda_Aposent" class="lps-form_input w-select" data-lang="pt">
+                      <option value="">Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Nao, mas tenho renda complementar">Não, mas tenho renda complementar</option>
+                      <option value="Nao sei">Não tenho certeza</option>
+                    </select>
+                    <select name="Income_Retire" class="lps-form_input w-select" data-lang="en">
+                      <option value="">Select</option>
+                      <option value="Sim">Yes</option>
+                      <option value="Nao, mas tenho renda complementar">No, but I have supplemental income</option>
+                      <option value="Nao sei">Not sure</option>
+                    </select>
+                  </div>
+                  <div class="lps-form_question-label" data-lang="pt">Possui renda complementar (investimentos, pensão privada, aluguéis)?</div>
+                  <div class="lps-form_question-label" data-lang="en">Do you have supplemental income (investments, private pension, rentals)?</div>
+                  <div class="lps-form_inputs-wrap">
+                    <select name="Renda_Complementar" class="lps-form_input w-select" data-lang="pt">
+                      <option value="">Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Nao">Não</option>
+                    </select>
+                    <select name="Supplemental_Income" class="lps-form_input w-select" data-lang="en">
+                      <option value="">Select</option>
+                      <option value="Sim">Yes</option>
+                      <option value="Nao">No</option>
                     </select>
                   </div>
                 </div>
@@ -2814,6 +2925,86 @@ a.button.do.w-button:hover {
                       <option value="Nao sei">Not sure</option>
                     </select>
                   </div>
+                </div>
+
+                <!-- Campos condicionais: Estudante -->
+                <div id="cond-estudante" class="lps-form_conditional" style="display:none">
+                  <div class="lps-form_question-label" data-lang="pt">Você possui comprovante de matrícula em instituição brasileira?</div>
+                  <div class="lps-form_question-label" data-lang="en">Do you have a certificate of enrollment from a Brazilian institution?</div>
+                  <div class="lps-form_inputs-wrap">
+                    <select name="Matricula_Estudante" class="lps-form_input w-select" data-lang="pt">
+                      <option value="">Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Em processo">Em processo de matrícula</option>
+                      <option value="Nao">Ainda não</option>
+                    </select>
+                    <select name="Enrollment_Student" class="lps-form_input w-select" data-lang="en">
+                      <option value="">Select</option>
+                      <option value="Sim">Yes</option>
+                      <option value="Em processo">In the enrollment process</option>
+                      <option value="Nao">Not yet</option>
+                    </select>
+                  </div>
+                  <div class="lps-form_question-label" data-lang="pt">Qual é a modalidade do curso?</div>
+                  <div class="lps-form_question-label" data-lang="en">What is the course modality?</div>
+                  <div class="lps-form_inputs-wrap">
+                    <select name="Modalidade_Estudante" class="lps-form_input w-select" data-lang="pt">
+                      <option value="">Selecione</option>
+                      <option value="Presencial">Presencial</option>
+                      <option value="Hibrido">Híbrido</option>
+                      <option value="Online">Online / EAD</option>
+                    </select>
+                    <select name="Modality_Student" class="lps-form_input w-select" data-lang="en">
+                      <option value="">Select</option>
+                      <option value="Presencial">In-person</option>
+                      <option value="Hibrido">Hybrid</option>
+                      <option value="Online">Online / Distance learning</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Campos condicionais: Autorização de Trabalho -->
+                <div id="cond-trabalho" class="lps-form_conditional" style="display:none">
+                  <div class="lps-form_question-label" data-lang="pt">Você possui contrato de trabalho com empresa no Brasil?</div>
+                  <div class="lps-form_question-label" data-lang="en">Do you have a work contract with a company in Brazil?</div>
+                  <div class="lps-form_inputs-wrap">
+                    <select name="Contrato_Trabalho" class="lps-form_input w-select" data-lang="pt">
+                      <option value="">Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Em negociacao">Em negociação</option>
+                      <option value="Nao">Não</option>
+                    </select>
+                    <select name="Work_Contract" class="lps-form_input w-select" data-lang="en">
+                      <option value="">Select</option>
+                      <option value="Sim">Yes</option>
+                      <option value="Em negociacao">Under negotiation</option>
+                      <option value="Nao">No</option>
+                    </select>
+                  </div>
+                  <div class="lps-form_question-label" data-lang="pt">A empresa patrocinará o processo de autorização de trabalho?</div>
+                  <div class="lps-form_question-label" data-lang="en">Will the company sponsor your work permit process?</div>
+                  <div class="lps-form_inputs-wrap">
+                    <select name="Patrocinio_Empresa" class="lps-form_input w-select" data-lang="pt">
+                      <option value="">Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Nao sei">Não sei</option>
+                      <option value="Nao">Não</option>
+                    </select>
+                    <select name="Company_Sponsor" class="lps-form_input w-select" data-lang="en">
+                      <option value="">Select</option>
+                      <option value="Sim">Yes</option>
+                      <option value="Nao sei">Not sure</option>
+                      <option value="Nao">No</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Campos condicionais: Outro -->
+                <div id="cond-outro" class="lps-form_conditional" style="display:none">
+                  <div class="lps-form_question-label" data-lang="pt">Conte-nos mais sobre o seu caso</div>
+                  <div class="lps-form_question-label" data-lang="en">Tell us more about your situation</div>
+                  <textarea name="Descricao_Outro" class="lps-form_input w-input" data-lang="pt" placeholder="Descreva brevemente seu objetivo no Brasil..." rows="3" style="resize:vertical;height:auto;"></textarea>
+                  <textarea name="Description_Other" class="lps-form_input w-input" data-lang="en" placeholder="Briefly describe your goal in Brazil..." rows="3" style="resize:vertical;height:auto;"></textarea>
                 </div>
 
                 <input type="submit" data-wait="Aguarde..." class="lps-form_button w-button" data-lang="pt" value="Falar com especialista"/>
@@ -2878,8 +3069,8 @@ a.button.do.w-button:hover {
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Trazer Quem Você Ama</h3>
             <h3 class="heading-style-h5" data-lang="en">Bring Who You Love</h3>
-            <p class="text-size-regular" data-lang="pt">Qualquer residência regularizada abre o caminho legal para a reunião familiar. Cônjuge, filhos e dependentes podem <strong>viver com você no Brasil</strong> sem depender de vistos temporários.</p>
-            <p class="text-size-regular" data-lang="en">Any legal residency opens the official path to family reunification. Your spouse, children, and dependents can <strong>live with you in Brazil</strong> without relying on temporary visas.</p>
+            <p class="text-size-regular" data-lang="pt">Qualquer residência regularizada abre o caminho legal para a reunião familiar. Cônjuge, filhos e dependentes podem <strong>viver com você no Brasil</strong> sem depender de prazos de turista.</p>
+            <p class="text-size-regular" data-lang="en">Any legal residency opens the official path to family reunion. Your spouse, children, and dependents can <strong>live with you in Brazil</strong> without relying on tourist deadlines.</p>
           </div>
         </div>
 
@@ -2900,8 +3091,8 @@ a.button.do.w-button:hover {
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Segurança para Ficar</h3>
             <h3 class="heading-style-h5" data-lang="en">Security to Stay</h3>
-            <p class="text-size-regular" data-lang="pt">Com a residência regularizada, você <strong>planeja sua vida no Brasil sem prazo de validade</strong>. Chega de correr atrás de renovações a cada ano.</p>
-            <p class="text-size-regular" data-lang="en">With legal residency, you can <strong>plan your life in Brazil without an expiration date</strong>. No more scrambling for renewals every year.</p>
+            <p class="text-size-regular" data-lang="pt">Com a residência regularizada, você <strong>planeja sua vida no Brasil sem prazo de validade</strong>. Chega de correr atrás de extensões de prazo de turista.</p>
+            <p class="text-size-regular" data-lang="en">With legal residency, you can <strong>plan your life in Brazil without an expiration date</strong>. No more scrambling for tourist extensions.</p>
           </div>
         </div>
 
@@ -2922,8 +3113,8 @@ a.button.do.w-button:hover {
           <div class="div-block-79">
             <h3 class="heading-style-h5" data-lang="pt">Porta para a Cidadania</h3>
             <h3 class="heading-style-h5" data-lang="en">A Path to Citizenship</h3>
-            <p class="text-size-regular" data-lang="pt">Se um dia você decidir ir além, a residência regularizada já é o requisito cumprido para pedir a <strong>naturalização e o passaporte brasileiro</strong>. A Amorim conhece esse caminho de ponta a ponta.</p>
-            <p class="text-size-regular" data-lang="en">If you ever choose to go further, legal residency already meets the key requirement for <strong>Brazilian naturalization and a passport</strong>. Amorim knows this route inside and out.</p>
+            <p class="text-size-regular" data-lang="pt">Se um dia você decidir ir além, a residência <strong>permanente</strong> é o requisito para pedir a <strong>naturalização e o passaporte brasileiro</strong>. A Amorim conhece esse caminho de ponta a ponta e orienta você desde a primeira etapa.</p>
+            <p class="text-size-regular" data-lang="en">If you ever choose to go further, <strong>permanent residency</strong> is the key requirement for <strong>Brazilian naturalization and a passport</strong>. Amorim knows this route inside and out and guides you from day one.</p>
           </div>
         </div>
 
@@ -3466,10 +3657,10 @@ a.button.do.w-button:hover {
         </div>
         <div class="lps-pathways-v2_header-right">
           <blockquote class="lps-pathways-v2_callout" data-lang="pt">
-            "Para cada nacionalidade, uma regra diferente.<br>A Amorim entende todas."
+            "Para cada tipo de residência, uma regra diferente.<br>A Amorim entende todas."
           </blockquote>
           <blockquote class="lps-pathways-v2_callout" data-lang="en">
-            "Every nationality plays by different rules.<br>Amorim knows them all."
+            "Every residency permit type plays by different rules.<br>Amorim knows them all."
           </blockquote>
           <p class="text-size-medium lps-pathways-v2_sub" data-lang="pt">Selecione abaixo a categoria que melhor descreve seu caso e entenda exatamente o que o Brasil exige de você, sem termos jurídicos, sem enrolação.</p>
           <p class="text-size-medium lps-pathways-v2_sub" data-lang="en">Select the category that best describes your situation and find out exactly what Brazil requires, no legal jargon, no confusion.</p>
@@ -3480,7 +3671,7 @@ a.button.do.w-button:hover {
       <div class="lps-pathways-v2_tabs" role="tablist">
         <button class="lps-pathway-tab is-active" data-tab="familiar" role="tab" aria-selected="true">
           <span data-lang-inline="pt">Reunião Familiar</span>
-          <span data-lang-inline="en">Family Reunification</span>
+          <span data-lang-inline="en">Family Reunion</span>
         </button>
         <button class="lps-pathway-tab" data-tab="nomade" role="tab" aria-selected="false">
           <span data-lang-inline="pt">Nômade Digital</span>
@@ -3507,13 +3698,13 @@ a.button.do.w-button:hover {
               <div class="lps-pathways-v2_panel-tag" data-lang="en">Who qualifies</div>
               <h3 class="heading-style-h4" data-lang="pt">Vínculo com brasileiro abre as portas</h3>
               <h3 class="heading-style-h4" data-lang="en">Family ties to a Brazilian open the doors</h3>
-              <p class="text-size-medium" data-lang="pt">Cônjuge, companheiro(a), filho(a), pai ou mãe de cidadão brasileiro têm direito à residência permanente por reunião familiar. É um dos caminhos mais robustos e com maior taxa de aprovação.</p>
-              <p class="text-size-medium" data-lang="en">Spouses, partners, children, or parents of Brazilian citizens qualify for permanent residency through family reunification, one of the strongest and highest-approval-rate pathways.</p>
+              <p class="text-size-medium" data-lang="pt">Cônjuge, companheiro(a), filho(a), pai ou mãe de cidadão brasileiro têm direito à residência por reunião familiar. É um dos caminhos mais robustos e com maior taxa de aprovação. O tipo de residência concedida depende do vínculo e do status do requerente no Brasil.</p>
+              <p class="text-size-medium" data-lang="en">Spouses, partners, children, or parents of Brazilian citizens qualify for residency through family reunion, one of the strongest and highest-approval-rate pathways. The type of residency granted depends on the applicant's family tie and current status in Brazil.</p>
               <ul class="lps-pathways-v2_list">
                 <li data-lang="pt">Inclui união estável comprovada</li>
                 <li data-lang="en">Includes proven common-law partnerships</li>
-                <li data-lang="pt">Residência permanente direta (sem etapa temporária)</li>
-                <li data-lang="en">Direct permanent residency (no temporary stage)</li>
+                <li data-lang="pt">Pode resultar em residência permanente ou temporária, conforme o caso</li>
+                <li data-lang="en">May result in permanent or temporary residency, depending on the situation</li>
                 <li data-lang="pt">Válido para todas as nacionalidades</li>
                 <li data-lang="en">Valid for all nationalities</li>
               </ul>
@@ -3522,13 +3713,14 @@ a.button.do.w-button:hover {
               <div class="lps-pathways-v2_meta-item">
                 <div class="lps-pathways-v2_meta-label" data-lang="pt">Prazo estimado</div>
                 <div class="lps-pathways-v2_meta-label" data-lang="en">Estimated timeline</div>
-                <div class="lps-pathways-v2_meta-value">4–8 meses</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="pt">3–6 meses</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="en">3–6 months</div>
               </div>
               <div class="lps-pathways-v2_meta-item">
-                <div class="lps-pathways-v2_meta-label" data-lang="pt">Tipo de visto</div>
-                <div class="lps-pathways-v2_meta-label" data-lang="en">Visa type</div>
-                <div class="lps-pathways-v2_meta-value" data-lang="pt">Residência Permanente</div>
-                <div class="lps-pathways-v2_meta-value" data-lang="en">Permanent Residency</div>
+                <div class="lps-pathways-v2_meta-label" data-lang="pt">Tipo de residência</div>
+                <div class="lps-pathways-v2_meta-label" data-lang="en">Residency type</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="pt">Permanente ou Temporária (conforme o caso)</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="en">Permanent or Temporary (depending on situation)</div>
               </div>
               <div class="lps-pathways-v2_meta-item">
                 <div class="lps-pathways-v2_meta-label" data-lang="pt">Complexidade</div>
@@ -3536,10 +3728,10 @@ a.button.do.w-button:hover {
                 <div class="lps-pathways-v2_meta-value lps-pathways-v2_complexity">
                   <span class="lps-pathways-v2_dot is-on"></span>
                   <span class="lps-pathways-v2_dot is-on"></span>
+                  <span class="lps-pathways-v2_dot is-on"></span>
                   <span class="lps-pathways-v2_dot"></span>
-                  <span class="lps-pathways-v2_dot"></span>
-                  <span class="lps-pathways-v2_meta-txt" data-lang="pt">Baixa</span>
-                  <span class="lps-pathways-v2_meta-txt" data-lang="en">Low</span>
+                  <span class="lps-pathways-v2_meta-txt" data-lang="pt">Média</span>
+                  <span class="lps-pathways-v2_meta-txt" data-lang="en">Medium</span>
                 </div>
               </div>
               <a href="#section-form" class="button-primary lps-pathways-v2_cta w-button" data-lang="pt">Verificar meu caso</a>
@@ -3561,8 +3753,8 @@ a.button.do.w-button:hover {
               <ul class="lps-pathways-v2_list">
                 <li data-lang="pt">Renda mínima de US$ 1.500/mês</li>
                 <li data-lang="en">Minimum income of US$1,500/month</li>
-                <li data-lang="pt">Renovável sem limite de vezes</li>
-                <li data-lang="en">Renewable with no limit</li>
+                <li data-lang="pt">Renovável sem limite de vezes (diferencial exclusivo da modalidade)</li>
+                <li data-lang="en">Renewable with no limit (a unique advantage of this visa type)</li>
                 <li data-lang="pt">Permite trazer cônjuge e dependentes</li>
                 <li data-lang="en">Allows bringing spouse and dependents</li>
               </ul>
@@ -3571,7 +3763,8 @@ a.button.do.w-button:hover {
               <div class="lps-pathways-v2_meta-item">
                 <div class="lps-pathways-v2_meta-label" data-lang="pt">Prazo estimado</div>
                 <div class="lps-pathways-v2_meta-label" data-lang="en">Estimated timeline</div>
-                <div class="lps-pathways-v2_meta-value">2–4 meses</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="pt">2–4 meses</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="en">2–4 months</div>
               </div>
               <div class="lps-pathways-v2_meta-item">
                 <div class="lps-pathways-v2_meta-label" data-lang="pt">Tipo de visto</div>
@@ -3585,10 +3778,10 @@ a.button.do.w-button:hover {
                 <div class="lps-pathways-v2_meta-value lps-pathways-v2_complexity">
                   <span class="lps-pathways-v2_dot is-on"></span>
                   <span class="lps-pathways-v2_dot is-on"></span>
-                  <span class="lps-pathways-v2_dot is-on"></span>
                   <span class="lps-pathways-v2_dot"></span>
-                  <span class="lps-pathways-v2_meta-txt" data-lang="pt">Média</span>
-                  <span class="lps-pathways-v2_meta-txt" data-lang="en">Medium</span>
+                  <span class="lps-pathways-v2_dot"></span>
+                  <span class="lps-pathways-v2_meta-txt" data-lang="pt">Baixa</span>
+                  <span class="lps-pathways-v2_meta-txt" data-lang="en">Low</span>
                 </div>
               </div>
               <a href="#section-form" class="button-primary lps-pathways-v2_cta w-button" data-lang="pt">Quero meu visto nômade</a>
@@ -3605,28 +3798,29 @@ a.button.do.w-button:hover {
               <div class="lps-pathways-v2_panel-tag" data-lang="en">Who qualifies</div>
               <h3 class="heading-style-h4" data-lang="pt">Renda estável = residência garantida</h3>
               <h3 class="heading-style-h4" data-lang="en">Stable income = guaranteed residency</h3>
-              <p class="text-size-medium" data-lang="pt">Aposentados, pensionistas ou quem possui renda passiva comprovada (investimentos, aluguéis) podem obter residência permanente no Brasil, aproveitando o custo de vida competitivo e a qualidade de vida.</p>
-              <p class="text-size-medium" data-lang="en">Retirees, pensioners, or those with proven passive income (investments, rentals) can obtain permanent residency in Brazil, taking advantage of the competitive cost of living and quality of life.</p>
+              <p class="text-size-medium" data-lang="pt">O requisito principal é a condição legal de aposentado(a) ou pensionista. Renda passiva complementar (investimentos, aluguéis) pode ser somada para atingir o mínimo exigido. O visto concedido é temporário (até 2 anos) e conversível para permanente.</p>
+              <p class="text-size-medium" data-lang="en">The primary requirement is legal retiree or pensioner status. Supplemental passive income (investments, rentals) can be combined to meet the minimum threshold. The visa granted is temporary (up to 2 years), convertible to permanent residency.</p>
               <ul class="lps-pathways-v2_list">
-                <li data-lang="pt">Renda mínima de aprox. R$ 6.000/mês</li>
-                <li data-lang="en">Minimum income of approx. R$6,000/month</li>
+                <li data-lang="pt">Renda mínima de USD 2.000/mês (pensão ou aposentadoria)</li>
+                <li data-lang="en">Minimum income of USD 2,000/month (pension or retirement)</li>
                 <li data-lang="pt">Não exige contrato de trabalho</li>
                 <li data-lang="en">No employment contract required</li>
-                <li data-lang="pt">Inclui cônjuge no mesmo processo</li>
-                <li data-lang="en">Spouse can be included in the same application</li>
+                <li data-lang="pt">Permite trazer familiares no mesmo processo</li>
+                <li data-lang="en">Allows bringing family members in the same application</li>
               </ul>
             </div>
             <div class="lps-pathways-v2_panel-meta">
               <div class="lps-pathways-v2_meta-item">
                 <div class="lps-pathways-v2_meta-label" data-lang="pt">Prazo estimado</div>
                 <div class="lps-pathways-v2_meta-label" data-lang="en">Estimated timeline</div>
-                <div class="lps-pathways-v2_meta-value">4–8 meses</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="pt">2–4 meses</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="en">2–4 months</div>
               </div>
               <div class="lps-pathways-v2_meta-item">
-                <div class="lps-pathways-v2_meta-label" data-lang="pt">Tipo de visto</div>
-                <div class="lps-pathways-v2_meta-label" data-lang="en">Visa type</div>
-                <div class="lps-pathways-v2_meta-value" data-lang="pt">Residência Permanente</div>
-                <div class="lps-pathways-v2_meta-value" data-lang="en">Permanent Residency</div>
+                <div class="lps-pathways-v2_meta-label" data-lang="pt">Tipo de residência</div>
+                <div class="lps-pathways-v2_meta-label" data-lang="en">Residency type</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="pt">Temporária (até 2 anos), conversível para permanente</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="en">Temporary (up to 2 years), convertible to permanent</div>
               </div>
               <div class="lps-pathways-v2_meta-item">
                 <div class="lps-pathways-v2_meta-label" data-lang="pt">Complexidade</div>
@@ -3654,28 +3848,29 @@ a.button.do.w-button:hover {
               <div class="lps-pathways-v2_panel-tag" data-lang="en">Who qualifies</div>
               <h3 class="heading-style-h4" data-lang="pt">De residente a cidadão brasileiro</h3>
               <h3 class="heading-style-h4" data-lang="en">From resident to Brazilian citizen</h3>
-              <p class="text-size-medium" data-lang="pt">Após 4 anos de residência (ou 1 ano se casado com brasileiro, com filho brasileiro, ou com serviços relevantes prestados ao país), você pode pedir a naturalização e se tornar cidadão brasileiro com todos os direitos.</p>
-              <p class="text-size-medium" data-lang="en">After 4 years of residency (or 1 year if married to a Brazilian, with a Brazilian child, or with services rendered to the country), you can apply for naturalization and become a full Brazilian citizen.</p>
+              <p class="text-size-medium" data-lang="pt">Exige residência permanente prévia no Brasil. Após 4 anos de residência permanente (ou 1 ano se casado(a) com brasileiro(a) ou com filho(a) brasileiro(a)), você pode solicitar a naturalização ordinária e se tornar cidadão(ã) brasileiro(a) com todos os direitos.</p>
+              <p class="text-size-medium" data-lang="en">Requires prior permanent residency in Brazil. After 4 years of permanent residency (or 1 year if married to a Brazilian or with a Brazilian child), you can apply for ordinary naturalization and become a full Brazilian citizen.</p>
               <ul class="lps-pathways-v2_list">
                 <li data-lang="pt">Passaporte brasileiro + dupla cidadania possível</li>
                 <li data-lang="en">Brazilian passport + dual citizenship possible</li>
-                <li data-lang="pt">Prazo reduzido para cônjuges de brasileiros</li>
-                <li data-lang="en">Reduced timeline for spouses of Brazilians</li>
-                <li data-lang="pt">Sem abrir mão da cidadania de origem</li>
-                <li data-lang="en">Without giving up original citizenship</li>
+                <li data-lang="pt">Prazo reduzido para cônjuges e pais de brasileiros</li>
+                <li data-lang="en">Reduced timeline for spouses and parents of Brazilians</li>
+                <li data-lang="pt">Brasil aceita dupla cidadania; verifique as regras do seu país de origem</li>
+                <li data-lang="en">Brazil accepts dual citizenship; check your origin country's rules</li>
               </ul>
             </div>
             <div class="lps-pathways-v2_panel-meta">
               <div class="lps-pathways-v2_meta-item">
                 <div class="lps-pathways-v2_meta-label" data-lang="pt">Prazo estimado</div>
                 <div class="lps-pathways-v2_meta-label" data-lang="en">Estimated timeline</div>
-                <div class="lps-pathways-v2_meta-value">1–4 anos</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="pt">1–4 anos de residência permanente + 1–2 anos de análise</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="en">1–4 years of permanent residency + 1–2 years processing</div>
               </div>
               <div class="lps-pathways-v2_meta-item">
-                <div class="lps-pathways-v2_meta-label" data-lang="pt">Tipo de visto</div>
-                <div class="lps-pathways-v2_meta-label" data-lang="en">Visa type</div>
-                <div class="lps-pathways-v2_meta-value" data-lang="pt">Naturalização Ordinária / Especial</div>
-                <div class="lps-pathways-v2_meta-value" data-lang="en">Ordinary / Special Naturalization</div>
+                <div class="lps-pathways-v2_meta-label" data-lang="pt">Tipo de residência</div>
+                <div class="lps-pathways-v2_meta-label" data-lang="en">Residency type</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="pt">Naturalização Ordinária</div>
+                <div class="lps-pathways-v2_meta-value" data-lang="en">Ordinary Naturalization</div>
               </div>
               <div class="lps-pathways-v2_meta-item">
                 <div class="lps-pathways-v2_meta-label" data-lang="pt">Complexidade</div>
@@ -3892,6 +4087,23 @@ a.button.do.w-button:hover {
                   </div>
                 </div>
 
+                <div class="swiper-slide is-lps-timeline-card">
+                  <div class="lps-timeline_progress-wrap">
+                    <div class="lps-timeline_progress-line"></div>
+                    <div class="lps-timeline_circle"><div class="text-size-medium">7</div></div>
+                    <div class="lps-timeline_progress-line"></div>
+                  </div>
+                  <div class="lps-timeline_card-content">
+                    <div class="icon-embed-medium"><div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#2FCC64"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-58-226 226-226-56-56-170 170-86-86-56 56 142 142Z"/></svg></div></div>
+                    <p class="text-size-medium lps-timeline-final" data-lang="pt">Retirada da CRNM e acompanhamento de renovação</p>
+                    <p class="text-size-medium lps-timeline-final" data-lang="en">CRNM collection and renewal follow-up</p>
+                    <div class="lps-timeline_card-desc">
+                      <p data-lang="pt">Você retira sua Carteira de Registro Nacional Migratório e passa a ter todos os direitos de residente no Brasil. A Amorim entra em contato quando o prazo de renovação se aproxima, para que você nunca precise se preocupar com vencimentos.</p>
+                      <p data-lang="en">You collect your National Migration Registration Card and gain full residency rights in Brazil. Amorim reaches out when your renewal date approaches, so you never have to worry about expiration.</p>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
             <div class="slider-main_bottom is-lps-timeline">
@@ -4096,8 +4308,8 @@ a.button.do.w-button:hover {
               <div class="living_flip-back">
                 <div class="living_flip-back-inner">
                   <span class="living_flip-back-emoji"><svg viewBox="0 0 24 24"><path d="M2 12c1.5-2 3-3 5-3s3.5 1 5 3 3.5 3 5 3"/><path d="M2 17c1.5-2 3-3 5-3s3.5 1 5 3 3.5 3 5 3"/><path d="M2 7c1.5-2 3-3 5-3s3.5 1 5 3 3.5 3 5 3"/></svg></span>
-                  <p class="living_flip-back-curiosity" data-lang="pt">O Brasil tem <strong>7.491 km de litoral</strong> e mais de 2.000 praias catalogadas. Qualidade de vida real, com custo até 60% menor do que nas principais capitais europeias.</p>
-                  <p class="living_flip-back-curiosity" data-lang="en">Brazil has <strong>7,491 km of coastline</strong> and over 2,000 catalogued beaches. Real quality of life, at up to 60% less than most European capitals.</p>
+                  <p class="living_flip-back-curiosity" data-lang="pt">O Brasil tem <strong>7.491 km de litoral</strong> e mais de 2.000 praias catalogadas. Cidades como Florianópolis, Salvador e Búzios oferecem qualidade de vida comparável à da Riviera Francesa, por uma fração do custo.</p>
+                  <p class="living_flip-back-curiosity" data-lang="en">Brazil has <strong>7,491 km of coastline</strong> and over 2,000 catalogued beaches. Cities like Florianópolis, Salvador, and Búzios offer a quality of life on par with the French Riviera, at a fraction of the cost.</p>
                 </div>
               </div>
             </div>
@@ -4314,7 +4526,7 @@ a.button.do.w-button:hover {
 </defs>
 </svg></div><div class="google-reviews_divider"></div><div class="google-reviews_info"><div class="google-reviews_info-rating"><div class="text-size-medium">5.0</div><div class="google-reviews_star"><div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 20 19" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
 <path d="M9.07088 0.612343C9.41462 -0.204115 10.5854 -0.204114 10.9291 0.612346L12.9579 5.43123C13.1029 5.77543 13.4306 6.01061 13.8067 6.0404L19.0727 6.45748C19.9649 6.52814 20.3267 7.62813 19.6469 8.2034L15.6348 11.5987C15.3482 11.8412 15.223 12.2218 15.3106 12.5843L16.5363 17.661C16.744 18.5211 15.7969 19.201 15.033 18.7401L10.5245 16.0196C10.2025 15.8252 9.7975 15.8252 9.47548 16.0196L4.96699 18.7401C4.20311 19.201 3.25596 18.5211 3.46363 17.661L4.68942 12.5843C4.77698 12.2218 4.65182 11.8412 4.36526 11.5987L0.353062 8.2034C-0.326718 7.62813 0.0350679 6.52814 0.927291 6.45748L6.19336 6.0404C6.5695 6.01061 6.89716 5.77543 7.04207 5.43123L9.07088 0.612343Z" fill="currentColor"/>
-</svg></div></div></div><div class="google-reviews_data"><div class="text-size-medium">+90</div><a href="#" class="text-size-medium custom-link">Avaliações</a></div></div></div></div></div></div></div><div class="divider-horizontal"></div><div class="lps-footer_bottom"><div class="lps-footer_bottom-left"><div class="text-size-small">© 2026 AMORIM GLOBAL. Todos os direitos reservados.</div><div class="text-size-tiny text-color-gray">AMORIM refere-se à organização e pode se referir as firmas Giselle Amorim Sociedade de Advocacia (CNPJ: 40.769.437/0001-09), e Amorim Consulting Ltda (CNPJ: 53.653.885/0001-94) cada uma das quais é uma entidade legal separada.  A AMORIM cumpre e observa todas as normas legais e regulatórias profissionais. Consulte a amorimlawfirm.com ou amorimglobal.com  para saber quais serviços são oferecidos no Brasil.</div></div><div class="lps-footer_bottom-right"><div class="lps-footer_legal-wrap"><a href="#" class="lps-footer_legal-link w-inline-block"><div class="text-size-small">Política de Privacidade</div></a><a href="#" class="lps-footer_legal-link w-inline-block"><div class="text-size-small">Termos de Uso</div></a><a href="#" class="lps-footer_legal-link w-inline-block"><div class="text-size-small">Cookies</div></a></div></div></div></div></div></div><div class="lps-footer_banner"><div class="text-size-small">Este site não é afiliado ao governo federal brasileiro. Somos uma empresa privada de assessoria em imigração.</div></div></footer>
+</svg></div></div></div><div class="google-reviews_data"><div class="text-size-medium">+129</div><a href="#" class="text-size-medium custom-link">Avaliações</a></div></div></div></div></div></div></div><div class="divider-horizontal"></div><div class="lps-footer_bottom"><div class="lps-footer_bottom-left"><div class="text-size-small">© 2026 AMORIM GLOBAL. Todos os direitos reservados.</div><div class="text-size-tiny text-color-gray">AMORIM refere-se à organização e pode se referir as firmas Giselle Amorim Sociedade de Advocacia (CNPJ: 40.769.437/0001-09), e Amorim Consulting Ltda (CNPJ: 53.653.885/0001-94) cada uma das quais é uma entidade legal separada.  A AMORIM cumpre e observa todas as normas legais e regulatórias profissionais. Consulte a amorimlawfirm.com ou amorimglobal.com  para saber quais serviços são oferecidos no Brasil.</div></div><div class="lps-footer_bottom-right"><div class="lps-footer_legal-wrap"><a href="#" class="lps-footer_legal-link w-inline-block"><div class="text-size-small">Política de Privacidade</div></a><a href="#" class="lps-footer_legal-link w-inline-block"><div class="text-size-small">Termos de Uso</div></a><a href="#" class="lps-footer_legal-link w-inline-block"><div class="text-size-small">Cookies</div></a></div></div></div></div></div></div><div class="lps-footer_banner"><div class="text-size-small">Este site não é afiliado ao governo federal brasileiro. Somos uma empresa privada de assessoria em imigração.</div></div></footer>
 
 </main>
 
@@ -4377,6 +4589,40 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isOpen) acc.classList.add('is-open');
     });
   });
+
+  // ── FAQ sticky sidebar (Apple-style, desktop only) ──
+  (function () {
+    const TOP_OFFSET    = 96;  // px from viewport top
+    const BOTTOM_PAD    = 48;  // px buffer before section end
+
+    const section = document.querySelector('.section_lps-faq');
+    const leftCol = document.querySelector('.lps-faq_content-left');
+    if (!section || !leftCol) return;
+
+    function update() {
+      if (window.innerWidth < 992) { leftCol.style.transform = ''; return; }
+
+      // Reset transform first so getBoundingClientRect gives natural position
+      leftCol.style.transform = 'none';
+
+      const secRect = section.getBoundingClientRect();
+      const colRect = leftCol.getBoundingClientRect();
+      const colH    = colRect.height;
+
+      // How far down we want to nudge the column
+      const idealShift = Math.max(0, TOP_OFFSET - colRect.top);
+
+      // Never let the column bottom pass the section bottom
+      const maxShift = Math.max(0, secRect.bottom - BOTTOM_PAD - colRect.top - colH);
+
+      const shift = Math.min(idealShift, maxShift);
+      leftCol.style.transform = shift > 0 ? 'translateY(' + shift + 'px)' : '';
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
 
   // ── SWIPER INIT ──
   document.querySelectorAll('.slider-main_component').forEach(slider => {
@@ -4534,15 +4780,18 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 /* Form conditional fields */
 function showConditionalFields(value, lang) {
-  var panels = ['cond-nomade', 'cond-aposentadoria', 'cond-familiar'];
+  var panels = ['cond-nomade', 'cond-aposentadoria', 'cond-familiar', 'cond-estudante', 'cond-trabalho', 'cond-outro'];
   panels.forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
   var map = {
-    'Nomade Digital':  'cond-nomade',
-    'Aposentadoria':   'cond-aposentadoria',
-    'Reuniao Familiar':'cond-familiar'
+    'Nomade Digital':   'cond-nomade',
+    'Aposentadoria':    'cond-aposentadoria',
+    'Reuniao Familiar': 'cond-familiar',
+    'Estudante':        'cond-estudante',
+    'Trabalho':         'cond-trabalho',
+    'Outro':            'cond-outro'
   };
   if (map[value]) {
     var target = document.getElementById(map[value]);
